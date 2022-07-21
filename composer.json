@@ -1,0 +1,17 @@
+{
+  "name": "proteo/rlwidget",
+  "description": "A Drupal module that provides a custom widget for the Revision log message field.",
+  "type": "drupal-custom-module",
+  "homepage": "https://github.com/proteo/rlwidget",
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "Proteo",
+      "email": "me@proteo.dev"
+    }
+  ],
+  "require": {
+    "php": ">=7.4.0",
+    "drupal/core": "^9.2"
+  }
+}

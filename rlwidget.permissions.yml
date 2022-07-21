@@ -1,0 +1,3 @@
+access revision field:
+  title: 'Control Revision Messages.'
+  description: 'View and use the Revision log message field if enabled per entity bundle.'

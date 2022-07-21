@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Revision Log Widget module file.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function rlwidget_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  // Sets the "Revision log message" field to be configurable and to use our
+  // custom form widget.
+  $revision_fields = $entity_type->get('revision_metadata_keys');
+  if (isset($revision_fields['revision_log_message'])) {
+    $fields[$revision_fields['revision_log_message']]
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'revision_log_widget',
+        'weight' => 10,
+        'settings' => [
+          'show' => TRUE,
+          'default' => '',
+          'permission_based' => FALSE,
+        ],
+      ]);
+  }
+}
