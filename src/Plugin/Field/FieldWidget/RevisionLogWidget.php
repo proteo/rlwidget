@@ -2,6 +2,8 @@
 
 namespace Drupal\rlwidget\Plugin\Field\FieldWidget;
 
+use Drupal\Core\Entity\EntityFormInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\StringTextareaWidget;
@@ -203,10 +205,15 @@ class RevisionLogWidget extends StringTextareaWidget implements ContainerFactory
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $node = $form_state->getFormObject()->getEntity();
+    $form_object = $form_state->getFormObject();
+
+    // Ensure we'll be able to access the getEntity() method.
+    if (!$form_object instanceof EntityFormInterface) {
+      return $element;
+    }
 
     // Our customizations make sense only when creating new content.
-    if ($node->isNew()) {
+    if ($form_object->getEntity() instanceof EntityInterface && $form_object->getEntity()->isNew()) {
       $settings = $this->getSettings();
 
       switch ($settings['display_mode']) {
