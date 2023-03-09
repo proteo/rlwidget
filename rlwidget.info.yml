@@ -1,5 +1,5 @@
 name: Revision Log Widget
 description: Provides a custom widget for the "Revision log message" field.
 type: module
-core_version_requirement: ^9.2
+core_version_requirement: ^9.2 || ^10
 package: Fields
